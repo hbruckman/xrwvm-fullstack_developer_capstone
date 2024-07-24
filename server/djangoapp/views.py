@@ -74,7 +74,7 @@ def registration(request):
         logger.debug("{} is new user email".format(email))
 
     # If it is a new user
-    if (!username_exist && !email_exist):
+    if (is not username_exist and is not email_exist):
         # Create user in auth_user table
         user = User.objects.create_user(
             username=username, first_name=first_name, last_name=last_name,
