@@ -63,7 +63,7 @@ def registration(request):
         username_exist = True
     except Exception as e:
         # If not, simply log this is a new user
-        logger.debug("{} is new user".format(username))
+        logger.debug(f"{username} is new user: {e}")
 
     # If it is a new user
     if not (username_exist):
@@ -76,7 +76,9 @@ def registration(request):
         data = {"userName": username, "status": "Authenticated"}
         return JsonResponse(data)
     else:
-        data = {"userName": username, "email": email, "error": "Already Registered"}
+        data = {"userName": username,
+                "email": email,
+                "error": "Already Registered"}
         return JsonResponse(data)
 
 # # Update the `get_dealerships` view to render the index page with
@@ -84,6 +86,7 @@ def registration(request):
 
 # # Update the `get_dealerships` render list of dealerships all by default,
 # particular state if state is passed
+
 
 def get_dealerships(request, state="All"):
     if (state == "All"):
@@ -130,7 +133,8 @@ def add_review(request):
             response = post_review(data)
             return JsonResponse({"status": 200, "message": response})
         except Exception as e:
-            return JsonResponse({"status": 401, "message": f"Error in posting review: {e}"})
+            return JsonResponse(
+                {"status": 401, "message": f"Error in posting review: {e}"})
     else:
         return JsonResponse({"status": 403, "message": "Unauthorized"})
 
