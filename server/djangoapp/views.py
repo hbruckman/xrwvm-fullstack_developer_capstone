@@ -133,17 +133,6 @@ def add_review(request):
     else:
         return JsonResponse({"status":403,"message":"Unauthorized"})
 
-# Create a `post_review` view to submit a review
-
-def post_review(data_dict):
-    request_url = backend_url+"/insert_review"
-    try:
-        response = requests.post(request_url,json=data_dict)
-        print(response.json())
-        return response.json()
-    except:
-        print("Network exception occurred")
-
 # Create a `get_cars` view to render the a list of cars
 
 def get_cars(request):
